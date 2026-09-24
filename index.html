@@ -1,0 +1,107 @@
+<!--
+=============================================================================
+    ______      _ _                                 
+   |  ____|    (_) |                                
+   | |__   _ __ _| | __                             
+   |  __| | '__| | |/ /                             
+   | |____| |  | |   <                              
+   |______|_|  |_|_|\_\                             
+                                                    
+    Feito por Erik Rodrigues Balisa                
+=============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>CSV Manager｜Buscador CSV Seguro</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Feito por Erik Rodrigues Balisa</h2>
+        <h1>Gerenciador de Dados CSV</h1>
+
+        <!-- Seção de Leitura de Arquivo -->
+        <div class="section">
+            <h2>Entrada de Dados</h2>
+            
+            <label for="fileInput">Ler arquivo CSV (file input):</label>
+            <input type="file" id="fileInput" accept=".csv" onchange="loadFromFile()" aria-label="Upload de arquivo CSV">
+            
+            <label for="manualData" class="mt-15">Ou cole os dados CSV manualmente abaixo:</label>
+            <textarea id="manualData" rows="5" placeholder="1, Exemplo Silva, exemplo@email.com, 11999999999" aria-label="Área de texto para CSV manual"></textarea>
+            
+            <div class="button-group">
+                <button class="btn" onclick="loadFromTextarea()" aria-label="Carregar dados do texto"><i class="fa-solid fa-upload"></i> Carregar do Texto</button>
+                <button class="btn btn-danger" onclick="clearData()" aria-label="Limpar todos os dados"><i class="fa-solid fa-eraser"></i> Limpar Tudo</button>
+            </div>
+        </div>
+
+        <!-- Seção de Ações e Busca -->
+        <div class="section">
+            <h2>Ações e Filtros</h2>
+            <div class="flex-row">
+                <input type="text" id="searchInput" placeholder="Digite algo para buscar..." onkeyup="searchData()" aria-label="Campo de busca">
+                <button class="btn" onclick="searchData()"><i class="fa-solid fa-search"></i> Buscar</button>
+                <button class="btn" onclick="listAll()"><i class="fa-solid fa-list"></i> Listar Todos</button>
+            </div>
+            
+            <div class="flex-row mt-15">
+                <label for="sortIndex" class="no-margin">Ordenar por Coluna (0 a 3):</label>
+                <input type="number" id="sortIndex" min="0" max="3" value="1" aria-label="Índice da coluna para ordenação">
+                <button class="btn" onclick="sortData()"><i class="fa-solid fa-sort"></i> Ordenar</button>
+            </div>
+        </div>
+
+        <!-- Seção da Tabela de Resultados -->
+        <div class="section no-border">
+            <div class="table-header">
+                <h3 id="totalCount">Total: 0 registros.</h3>
+                <div class="button-group no-margin">
+                    <button class="btn btn-danger" onclick="deleteSelected()"><i class="fa-solid fa-trash-can"></i> Excluir Selecionados</button>
+                    <button class="btn" onclick="exportData()"><i class="fa-solid fa-download"></i> Salvar (.csv)</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;"><i class="fa-solid fa-check-square"></i></th>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Renderizado pelo JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- VLibras - Acessibilidade -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
